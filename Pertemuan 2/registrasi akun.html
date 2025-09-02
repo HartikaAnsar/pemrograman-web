@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Registrasi Account TCPNS</title>
+    <style>
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 12px;
+            background-color: #fff;
+        }
+        .form-box {
+            width: 320px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: center;
+        }
+        h2 {
+            color: #003366;
+            font-size: 16px;
+            margin: 0 0 5px 0;
+        }
+        p {
+            margin: 0 0 15px 0;
+            font-size: 11px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-spacing: 5px;
+            text-align: left;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 95%;
+            height: 20px;
+            font-size: 12px;
+            border: 1px solid #999;
+            padding: 2px;
+        }
+        .tanggal select {
+            width: 32%;
+        }
+        .btn-submit {
+            margin-top: 10px;
+            padding: 3px 15px;
+            font-size: 12px;
+            border: 1px solid #999;
+            background: #f2f2f2;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Form Registrasi Account TCPNS</h2>
+        <p>Silahkan isi form di bawah ini dengan baik dan benar.</p>
+        <form>
+            <table>
+                <tr>
+                    <td>Nama:</td>
+                    <td><input type="text" name="nama"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" name="email"></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin:</td>
+                    <td>
+                        <select name="gender">
+                            <option>Pilih Jenis Kelamin</option>
+                            <option>Laki-laki</option>
+                            <option>Perempuan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tanggal Lahir:</td>
+                    <td class="tanggal">
+                        <select name="tgl">
+                            <option>Tgl</option>
+                            <script>
+                                for (let i=1;i<=31;i++){document.write(<option>${i}</option>);}
+                            </script>
+                        </select>
+                        <select name="bln">
+                            <option>Bulan</option>
+                            <option>Jan</option><option>Feb</option><option>Mar</option><option>Apr</option>
+                            <option>Mei</option><option>Jun</option><option>Jul</option><option>Agu</option>
+                            <option>Sep</option><option>Okt</option><option>Nov</option><option>Des</option>
+                        </select>
+                        <select name="thn">
+                            <option>Tahun</option>
+                            <script>
+                                for (let i=1950;i<=2025;i++){document.write(<option>${i}</option>);}
+                            </script>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" class="btn-submit">Kirim</button>
+        </form>
+    </div>
+</body>
+</html>
