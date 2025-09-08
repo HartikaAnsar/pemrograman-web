@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Portofolio Tika</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5c7ce;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 85%;
+      max-width: 1000px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #f7e3e7;
+      padding: 15px;
+      border-bottom: 2px solid #f5c7ce;
+    }
+    nav a {
+      margin: 0 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      position: relative;
+      font-size: 16px;
+    }
+    nav a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 0%;
+      background: #d96c91;
+      transition: 0.3s;
+      margin-top: 5px;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Konten */
+    .content {
+      padding: 40px;
+      text-align: center;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+    .active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* About Me */
+    .about-container {
+      display: flex;
+      flex-direction: column; /* biar foto di atas, teks di bawah */
+      align-items: center;   /* biar rata tengah */
+      text-align: center;    /* biar teks rata tengah */
+      gap: 15px;
+      padding: 20px;
+    }
+    .about-container img {
+      width: 150px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50% / 40%;
+      border: 3px solid #f5c7ce;
+    }
+    .about-text {
+      max-width: 500px;
+    }
+
+    /* Fun Fact */
+    .funfact-list {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .funfact-list li {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    /* Contact */
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .contact-links a {
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      background: #d96c91;
+      padding: 10px 18px;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+    .contact-links a:hover {
+      background: #bf5477;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navbar -->
+    <nav>
+      <a href="#" onclick="showSection('home')">Home</a>
+      <a href="#" onclick="showSection('about')">About Me</a>
+      <a href="#" onclick="showSection('funfact')">Fun Fact</a>
+      <a href="#" onclick="showSection('contact')">Contact</a>
+    </nav>
+
+    <!-- Konten -->
+    <div class="content">
+      <!-- HOME -->
+      <div id="home" class="section active">
+        <h2>haiii, kenalan yukss</h2>
+        <p>cuman manusia biasa yang mimpinya pengen kaya tapi rebahan terus 🤭🫶🏻</p>
+      </div>
+
+      <!-- ABOUT ME -->
+      <div id="about" class="section">
+        <div class="about-container">
+          <img src="tika.jpg" alt="Foto Tika">
+          <div class="about-text">
+            <h2></h2>
+            <p><b>Nama:</b> Hartika Ansar</p>
+            <p><b>Nama Panggilan:</b> Tika</p>
+            <p><b>Asal:</b> Kab. Enrekang</p>
+            <p><b>Tanggal lahir:</b> 14 Maret 2006</p>
+            <p><b>Pendidikan:</b> Universitas Negeri Makassar</p>
+            <p><b>Jurusan:</b> Teknik Komputer</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FUN FACT -->
+      <div id="funfact" class="section">
+        <h2>fun Fact</h2>
+        <ul class="funfact-list">
+          <li>➤ suka baca wattpad/novel kalo lagi ga ada tugas</li>
+          <li>➤ hobi dengerin lagu galau padahal lagi ga galau</li>
+          <li>➤ cita-cita kaya, tapi hobi rebahan</li>
+          <li>➤ scroll tiktok seharian</li>
+          <li>➤ sukaa samaa warna pink hihihi</li>
+        </ul>
+      </div>
+
+      <!-- CONTACT -->
+      <div id="contact" class="section">
+        <h2>ini sosmed akuhh👇🏻</h2>
+        <div class="contact-links">
+          <a href="https://wa.me/6282271512957" target="_blank">WhatsApp</a>
+          <a href="https://instagram.com/hrtikansar" target="_blank">Instagram</a>
+          <a href="https://www.tiktok.com/@bvluesky?_t=ZS-8zXCF5MPjZh&_r=1" target="_blank">Tiktok</a>
+          <a href="mailto:hartikansar14@gmail.com" target="_blank">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>
