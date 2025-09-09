@@ -1,44 +1,35 @@
-<!DOCTYPE html>
+# ANALISIS PORTOFOLIO TIKA
+``` <!DOCTYPE html>
 <html lang="id">
-Kode ini digunakan untuk mendefinisikan bahwa file ini adalah dokumen HTML5. <!DOCTYPE html> memberi tahu browser agar membaca file dengan standar HTML5, sehingga semua fitur modern bisa berjalan. Atribut lang="id" pada tag <html> memberi informasi bahwa bahasa utama halaman ini adalah bahasa Indonesia, yang bermanfaat untuk mesin pencari dan pembaca layar.
 <head>
   <meta charset="UTF-8">
   <title>Portofolio Tika</title>
   <style>
-Kode ini digunakan untuk bagian head dari dokumen HTML. meta charset="UTF-8" berfungsi agar teks mendukung berbagai karakter, termasuk huruf khusus dan emoji. <title> memberi judul halaman "Portofolio Tika", yang akan tampil di tab browser. Lalu <style> dipakai untuk menuliskan CSS langsung di dalam file HTML, sehingga tidak perlu file CSS terpisah.
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-Kode ini digunakan untuk mengatur gaya dasar semua elemen HTML. margin: 0 dan padding: 0 membuat tampilan lebih bersih karena menghapus jarak bawaan dari browser. box-sizing: border-box membuat perhitungan lebar elemen jadi lebih mudah karena padding dan border ikut dihitung dalam ukuran total. font-family: Arial, sans-serif mengatur font standar agar seragam dan lebih enak dibaca.
-body {
+```
+Kode ini digunakan untuk mendefinisikan struktur awal dokumen website. <!DOCTYPE html> memberi tahu browser bahwa dokumen ini memakai standar HTML5. Tag <html lang="id"> dipakai untuk menandakan bahwa bahasa utama isi halaman adalah Bahasa Indonesia, sehingga mesin pencari dan pembaca layar bisa menyesuaikan. Di dalam <head>, terdapat <meta charset="UTF-8"> yang mengatur format teks agar mendukung berbagai karakter termasuk huruf Indonesia dan emoji. Tag <title> berfungsi memberi judul di tab browser, yaitu "Portofolio Tika". Sedangkan <style> menandakan bahwa kode CSS untuk mendesain tampilan halaman akan ditulis langsung di dalam file HTML ini.
+``` body {
   background: #f5c7ce;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
-Kode ini digunakan untuk mengatur tampilan body halaman. Latar belakang diberi warna pink (#f5c7ce). Lalu digunakan flexbox (display: flex) untuk membuat semua isi halaman otomatis berada di tengah layar, baik secara horizontal (justify-content: center) maupun vertikal (align-items: center). min-height: 100vh artinya tinggi halaman minimal setinggi layar penuh (100% tinggi viewport).
-<div class="container">
-Kode ini digunakan sebagai wadah utama seluruh isi website. Di CSS, .container diatur memiliki lebar maksimum 1000px, background putih, border radius agar sudut melengkung, serta bayangan (box-shadow) sehingga terlihat seperti kartu (card) yang rapi dan modern. Container ini membuat konten terlihat fokus di tengah layar.
-<nav>
+```
+Kode ini digunakan untuk mengatur tampilan dasar dari seluruh halaman. Latar belakang (background) diberi warna pink muda dengan kode hex #f5c7ce untuk menciptakan kesan lembut dan feminin. display: flex menjadikan halaman memakai Flexbox layout, sebuah sistem tata letak modern di CSS. Properti justify-content: center membuat konten di dalam halaman berada di tengah secara horizontal, sedangkan align-items: center membuatnya berada di tengah secara vertikal. Dengan tambahan min-height: 100vh, tinggi halaman dibuat minimal sama dengan tinggi layar, sehingga konten selalu tampil penuh satu layar meskipun isinya sedikit.
+``` <nav>
   <a href="#" onclick="showSection('home')">Home</a>
   <a href="#" onclick="showSection('about')">About Me</a>
   <a href="#" onclick="showSection('funfact')">Fun Fact</a>
   <a href="#" onclick="showSection('contact')">Contact</a>
 </nav>
-Kode ini digunakan untuk membuat navigasi menu di bagian atas halaman. Ada empat link: Home, About Me, Fun Fact, dan Contact. Atribut onclick="showSection(...)" berfungsi memanggil fungsi JavaScript agar bisa berpindah section. Dengan cara ini, tidak perlu reload atau pindah halaman, cukup ganti isi konten sesuai section yang dipilih.
-<div class="content">
-  <!-- HOME -->
-  <div id="home" class="section active">
-    <h2>haiii, kenalan yukss</h2>
-    <p>cuman manusia biasa yang mimpinya pengen kaya tapi rebahan terus 🤭🫶🏻</p>
-  </div>
-Kode ini digunakan untuk menampilkan section Home. Section ini diberi id="home" dan class active, sehingga ketika halaman pertama kali dibuka, bagian Home langsung terlihat. Isi section berupa judul sambutan dan kalimat perkenalan singkat.
-<!-- ABOUT ME -->
-<div id="about" class="section">
+```
+Kode ini digunakan untuk membuat menu navigasi di bagian atas halaman. Tag <nav> berfungsi sebagai pembungkus elemen navigasi. Di dalamnya terdapat beberapa link (<a>) yaitu Home, About Me, Fun Fact, Contact. Masing-masing link memiliki atribut onclick="showSection('id')" yang memanggil fungsi JavaScript showSection dengan parameter id section yang ingin ditampilkan. Dengan mekanisme ini, ketika pengguna mengklik salah satu menu, konten di layar akan berganti tanpa perlu memuat ulang halaman.
+```<div id="home" class="section active">
+  <h2>haiii, kenalan yukss</h2>
+  <p>cuman manusia biasa yang mimpinya pengen kaya tapi rebahan terus 🤭🫶🏻</p>
+</div>```
+Kode ini digunakan untuk menampilkan halaman Home. Tag <div> diberi id="home" agar bisa diakses oleh JavaScript saat navigasi dilakukan. Class section menandakan bahwa bagian ini adalah salah satu section dari halaman, sedangkan tambahan class active membuatnya tampil pertama kali saat halaman dibuka. Isi section berupa heading <h2> berisi sapaan "haiii, kenalan yukss", dan paragraf <p> yang memberi kesan santai dan personal dengan gaya bahasa sehari-hari.
+```<div id="about" class="section">
   <div class="about-container">
     <img src="tika.jpg" alt="Foto Tika">
     <div class="about-text">
@@ -50,10 +41,9 @@ Kode ini digunakan untuk menampilkan section Home. Section ini diberi id="home" 
       <p><b>Jurusan:</b> Teknik Komputer</p>
     </div>
   </div>
-</div>
-Kode ini digunakan untuk bagian About Me. Di dalamnya ada foto profil (tika.jpg) dengan bentuk bulat lonjong (karena pakai border-radius: 50% / 40%), lalu di sampingnya ada teks biodata singkat. CSS pada .about-container mengatur agar konten rapi, foto di atas, teks di bawah, dan semua elemen berada di tengah.
-<!-- FUN FACT -->
-<div id="funfact" class="section">
+</div>```
+Kode ini digunakan untuk menampilkan informasi pribadi pemilik website. Bagian ini memiliki id="about" agar bisa dipanggil ketika menu About Me diklik. Isi section terdiri dari <img> yang menampilkan foto pribadi bernama tika.jpg dengan teks alternatif "Foto Tika". Kemudian ada <div class="about-text"> yang berisi beberapa paragraf <p> dengan label tebal <b> untuk menonjolkan data penting seperti nama, panggilan, asal daerah, tanggal lahir, pendidikan, dan jurusan kuliah. Bagian ini membuat website lebih personal karena memperkenalkan identitas pemilik secara jelas.
+```<div id="funfact" class="section">
   <h2>fun Fact</h2>
   <ul class="funfact-list">
     <li>➤ suka baca wattpad/novel kalo lagi ga ada tugas</li>
@@ -62,10 +52,9 @@ Kode ini digunakan untuk bagian About Me. Di dalamnya ada foto profil (tika.jpg)
     <li>➤ scroll tiktok seharian</li>
     <li>➤ sukaa samaa warna pink hihihi</li>
   </ul>
-</div>
-Kode ini digunakan untuk menampilkan section Fun Fact. Isi berupa daftar poin (list) berisi hal-hal unik tentang pemilik website. CSS pada .funfact-list membuat daftar terlihat rapi, rata kiri, dan berada di tengah halaman dengan lebar maksimal 500px.
-<!-- CONTACT -->
-<div id="contact" class="section">
+</div>```
+Kode ini digunakan untuk menampilkan fakta-fakta unik tentang pemilik website. Judul "Fun Fact" ditulis dengan heading <h2>. Isi fakta disusun dalam list menggunakan <ul> (unordered list) dan <li> (list item), sehingga rapi dan mudah dibaca. Masing-masing fakta menggunakan gaya bahasa santai, misalnya suka baca wattpad, dengerin lagu galau, cita-cita kaya tapi malas, scroll TikTok, dan suka warna pink. Bagian ini menambahkan sisi kepribadian yang lebih ringan dan menyenangkan.
+```<div id="contact" class="section">
   <h2>ini sosmed akuhh👇🏻</h2>
   <div class="contact-links">
     <a href="https://wa.me/6282271512957" target="_blank">WhatsApp</a>
@@ -73,13 +62,24 @@ Kode ini digunakan untuk menampilkan section Fun Fact. Isi berupa daftar poin (l
     <a href="https://www.tiktok.com/@bvluesky?_t=ZS-8zXCF5MPjZh&_r=1" target="_blank">Tiktok</a>
     <a href="mailto:hartikansar14@gmail.com" target="_blank">Email</a>
   </div>
-</div>
-Kode ini digunakan untuk menampilkan section Contact. Ada empat link berbentuk tombol: WhatsApp, Instagram, TikTok, dan Email. Masing-masing link diberi target="_blank" supaya terbuka di tab baru. CSS pada .contact-links a membuat tombol berbentuk bulat memanjang, berwarna pink, dan berubah warna lebih gelap ketika diarahkan kursor (hover).
-<script>
+</div>```
+Kode ini digunakan untuk menampilkan tautan ke sosial media pemilik website. Judul "ini sosmed akuhh👇🏻" memberi kesan santai dan ramah. Bagian <div class="contact-links"> berisi beberapa link <a> ke WhatsApp, Instagram, TikTok, dan Email. Atribut target="_blank" dipakai agar link terbuka di tab baru, sehingga pengguna tidak meninggalkan halaman utama. Bagian ini penting untuk memudahkan orang lain menghubungi atau mengikuti pemilik website di media sosial.
+```<script>
   function showSection(id) {
     const sections = document.querySelectorAll('.section');
     sections.forEach(sec => sec.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
 </script>
-Kode ini digunakan untuk logika navigasi antar section. Fungsi showSection(id) pertama-tama mengambil semua elemen dengan class .section, lalu menghapus class active agar semuanya tersembunyi. Setelah itu, hanya section dengan id sesuai pilihan yang diberi class active, sehingga bagian tersebut muncul. Efek animasi muncul karena CSS @keyframes fadeIn.
+```
+Kode ini digunakan untuk mengatur logika navigasi antar halaman. Fungsi showSection(id) bekerja dengan cara:
+
+Mengambil semua elemen dengan class .section.
+
+Menghapus class active dari semua section agar tidak terlihat.
+
+Menambahkan class active pada section dengan id yang sesuai dengan menu yang diklik.
+
+Dengan logika ini, hanya satu section yang aktif dan terlihat pada satu waktu. Hasilnya, website terasa seperti aplikasi satu halaman (single-page app) sederhana.
+Jadi, Website portofolio ini menggunakan kombinasi HTML, CSS, dan JavaScript sederhana. Struktur halaman dibagi menjadi beberapa section: Home, About Me, Fun Fact, dan Contact. CSS mengatur tata letak dan warna agar website lebih menarik, sementara JavaScript dipakai untuk membuat navigasi antar section tanpa harus memuat ulang halaman. Secara keseluruhan, project ini sudah cukup untuk dijadikan portofolio pribadi sekaligus latihan dasar dalam membangun website.
+
