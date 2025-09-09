@@ -1,3 +1,5 @@
+Pertemuan 3
+
 # Portofolio Tika
 
 Ini adalah project website portofolio pribadi sederhana menggunakan **HTML dan CSS**.  
