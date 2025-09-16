@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Portofolio Tika</title>
+  <title>Portofolio Hartika Ansar</title>
   <style>
     * {
       margin: 0;
@@ -79,34 +79,22 @@
     /* About Me */
     .about-container {
       display: flex;
-      flex-direction: column; /* biar foto di atas, teks di bawah */
-      align-items: center;   /* biar rata tengah */
-      text-align: center;    /* biar teks rata tengah */
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: 15px;
       padding: 20px;
     }
     .about-container img {
       width: 150px;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
       border-radius: 50% / 40%;
       border: 3px solid #f5c7ce;
     }
     .about-text {
-      max-width: 500px;
-    }
-
-    /* Fun Fact */
-    .funfact-list {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .funfact-list li {
-      margin: 10px 0;
-      font-size: 16px;
+      max-width: 600px;
+      text-align: justify;
     }
 
     /* Contact */
@@ -135,55 +123,45 @@
   <div class="container">
     <!-- Navbar -->
     <nav>
-      <a href="#" onclick="showSection('home')">Home</a>
-      <a href="#" onclick="showSection('about')">About Me</a>
-      <a href="#" onclick="showSection('funfact')">Fun Fact</a>
-      <a href="#" onclick="showSection('contact')">Contact</a>
+      <a href="#" onclick="showSection('home')">Beranda</a>
+      <a href="#" onclick="showSection('about')">Tentang Saya</a>
+      <a href="#" onclick="showSection('funfact')">Informasi Tambahan</a>
+      <a href="#" onclick="showSection('contact')">Kontak</a>
     </nav>
 
     <!-- Konten -->
     <div class="content">
       <!-- HOME -->
       <div id="home" class="section active">
-        <h2>haiii, kenalan yukss</h2>
-        <p>cuman manusia biasa yang mimpinya pengen kaya tapi rebahan terus 🤭🫶🏻</p>
+        <h2>Selamat datang</h2>
+        <p>Saya adalah individu yang memiliki motivasi untuk mencapai tujuan hidup yang sukses, sekaligus menghargai waktu untuk bersantai dan merefleksikan diri.</p>
       </div>
 
       <!-- ABOUT ME -->
       <div id="about" class="section">
         <div class="about-container">
-          <img src="tika.jpg" alt="Foto Tika">
+          <img src="tika.jpg" alt="Foto Hartika Ansar">
           <div class="about-text">
-            <h2></h2>
-            <p><b>Nama:</b> Hartika Ansar</p>
-            <p><b>Nama Panggilan:</b> Tika</p>
-            <p><b>Asal:</b> Kab. Enrekang</p>
-            <p><b>Tanggal lahir:</b> 14 Maret 2006</p>
-            <p><b>Pendidikan:</b> Universitas Negeri Makassar</p>
-            <p><b>Jurusan:</b> Teknik Komputer</p>
+            <h2>Tentang Saya</h2>
+            <p>Nama saya Hartika Ansar, akrab dipanggil Tika. Saya berasal dari Kabupaten Enrekang dan lahir pada tanggal 14 Maret 2006. Saat ini saya menempuh pendidikan di Universitas Negeri Makassar, jurusan Teknik Komputer. Saya memiliki minat yang luas dan senang mempelajari hal-hal baru yang dapat meningkatkan kemampuan diri. Di waktu senggang, saya menikmati membaca novel melalui platform Wattpad, mendengarkan musik, dan menonton konten kreatif di TikTok. Saya juga memiliki aspirasi untuk meraih kesuksesan finansial dan tetap menghargai momen santai untuk refleksi diri. Selain itu, saya memiliki preferensi terhadap warna pink, yang menjadi warna favorit dalam berbagai aspek kehidupan.</p>
           </div>
         </div>
       </div>
 
-      <!-- FUN FACT -->
+      <!-- FUN FACT / INFORMASI TAMBAHAN -->
       <div id="funfact" class="section">
-        <h2>fun Fact</h2>
-        <ul class="funfact-list">
-          <li>➤ suka baca wattpad/novel kalo lagi ga ada tugas</li>
-          <li>➤ hobi dengerin lagu galau padahal lagi ga galau</li>
-          <li>➤ cita-cita kaya, tapi hobi rebahan</li>
-          <li>➤ scroll tiktok seharian</li>
-          <li>➤ sukaa samaa warna pink hihihi</li>
-        </ul>
+        <h2>Informasi Tambahan</h2>
+        <p>Saya memiliki beberapa minat dan kebiasaan yang mencerminkan kepribadian saya. Di waktu senggang, saya gemar membaca novel melalui platform Wattpad sebagai sarana hiburan dan pengembangan wawasan. Saya juga menikmati mendengarkan musik bernuansa emosional, meskipun tidak sedang mengalami perasaan tersebut, karena musik merupakan sarana relaksasi. Selain itu, saya memiliki aspirasi untuk mencapai kesuksesan finansial, namun tetap menghargai waktu untuk beristirahat dan bersantai. Aktivitas lain yang saya lakukan termasuk mengakses konten kreatif di platform TikTok, dan saya memiliki preferensi khusus terhadap warna pink, yang kerap menjadi pilihan dalam berbagai aspek kehidupan.</p>
       </div>
 
       <!-- CONTACT -->
       <div id="contact" class="section">
-        <h2>ini sosmed akuhh👇🏻</h2>
+        <h2>Kontak</h2>
+        <p>Anda dapat menghubungi saya melalui beberapa platform berikut:</p>
         <div class="contact-links">
           <a href="https://wa.me/6282271512957" target="_blank">WhatsApp</a>
           <a href="https://instagram.com/hrtikansar" target="_blank">Instagram</a>
-          <a href="https://www.tiktok.com/@bvluesky?_t=ZS-8zXCF5MPjZh&_r=1" target="_blank">Tiktok</a>
+          <a href="https://www.tiktok.com/@bvluesky?_t=ZS-8zXCF5MPjZh&_r=1" target="_blank">TikTok</a>
           <a href="mailto:hartikansar14@gmail.com" target="_blank">Email</a>
         </div>
       </div>
@@ -199,3 +177,4 @@
   </script>
 </body>
 </html>
+
