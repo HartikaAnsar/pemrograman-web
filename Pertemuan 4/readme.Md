@@ -93,3 +93,4 @@ Bagian About Me menampilkan foto di kiri dan teks di kanan menggunakan grid. Fot
 Bagian kontak menyediakan link ke beberapa platform. Tautan ditampilkan sebagai tombol bundar dengan warna pink dan efek hover naik sedikit.
 
 
+
