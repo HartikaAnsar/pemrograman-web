@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+``<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +6,7 @@
   <style>
     /* CSS ditulis di sini */
   </style>
-</head
+</head``
 Blok pertama adalah struktur kerangka dokumen. <!DOCTYPE html> menyatakan bahwa halaman ini menggunakan standar HTML5. Elemen <html lang="id"> mendefinisikan bahasa Indonesia untuk isi dokumen. Pada <head>, terdapat <meta charset="UTF-8"> untuk mendukung karakter Unicode, <title> untuk judul tab browser, serta <style> yang berisi seluruh aturan CSS internal. Dengan struktur ini, halaman bisa dibaca dan ditampilkan dengan benar oleh browser.
 * {
   margin: 0;
@@ -91,3 +91,4 @@ Bagian About Me menampilkan foto di kiri dan teks di kanan menggunakan grid. Fot
   </div>
 </div>
 Bagian kontak menyediakan link ke beberapa platform. Tautan ditampilkan sebagai tombol bundar dengan warna pink dan efek hover naik sedikit.
+
