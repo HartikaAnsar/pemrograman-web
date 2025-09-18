@@ -1,4 +1,9 @@
-```<!DOCTYPE html>
+# 📌 Analisis Kode Portofolio Tika
+
+## 1. Struktur Dasar HTML
+```
+html
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -6,9 +11,12 @@
   <style>
     /* CSS ditulis di sini */
   </style>
-</head```
-Blok pertama adalah struktur kerangka dokumen. <!DOCTYPE html> menyatakan bahwa halaman ini menggunakan standar HTML5. Elemen <html lang="id"> mendefinisikan bahasa Indonesia untuk isi dokumen. Pada <head>, terdapat <meta charset="UTF-8"> untuk mendukung karakter Unicode, <title> untuk judul tab browser, serta <style> yang berisi seluruh aturan CSS internal. Dengan struktur ini, halaman bisa dibaca dan ditampilkan dengan benar oleh browser.
-```* {
+</head>
+```
+Blok ini adalah kerangka utama dokumen HTML.
+<!DOCTYPE html> mendeklarasikan standar HTML5. Tag <html lang="id"> menandakan bahasa utama dokumen adalah bahasa Indonesia. Di dalam <head>, terdapat <meta charset="UTF-8"> agar semua karakter bisa terbaca. <title> menampilkan judul tab browser, sedangkan <style> menampung aturan CSS internal.
+```
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -21,9 +29,11 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-}```
-Blok CSS global mengatur reset pada semua elemen menggunakan selector *, agar margin dan padding default dihilangkan serta ukuran dihitung dengan border-box. Font bawaan seluruh halaman menggunakan Arial. Pada body, diberikan gradien pink lembut sebagai latar belakang, lalu digunakan flexbox untuk memusatkan konten .container secara vertikal dan horizontal dengan tinggi penuh layar.
-```.container {
+}
+```
+Selector * dipakai untuk reset CSS agar konsisten. Pada body, latar belakang diberi gradien pink lembut dan diatur dengan flexbox supaya .container berada di tengah layar.
+```
+.container {
   width: 85%;
   max-width: 1100px;
   background: white;
@@ -32,9 +42,11 @@ Blok CSS global mengatur reset pada semua elemen menggunakan selector *, agar ma
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}```
-Bagian container adalah pembungkus utama seluruh konten. Container dibuat fleksibel dengan lebar 85% namun tidak lebih dari 1100px. Warna latar putih memberi kontras, sudut dibuat membulat dengan border-radius, dan bayangan (box-shadow) menambah kesan elegan. Container juga menggunakan flex column agar isi diatur dari atas ke bawah.
-```<nav>
+}
+```
+.container membungkus seluruh isi web. Ukurannya fleksibel dengan max-width agar nyaman di semua layar. Warna putih, sudut membulat, dan bayangan memberi kesan modern.
+```
+<nav>
   <div class="logo">Portofolio Tika</div>
   <ul>
     <li><a href="#" onclick="showSection('home')">Home</a></li>
@@ -43,9 +55,33 @@ Bagian container adalah pembungkus utama seluruh konten. Container dibuat fleksi
     <li><a href="#" onclick="showSection('gallery')">Galeri</a></li>
     <li><a href="#" onclick="showSection('contact')">Contact</a></li>
   </ul>
-</nav>```
-Navbar memuat logo di kiri dan menu navigasi di kanan. CSS mengatur nav menggunakan flex dengan padding nyaman serta garis bawah dekoratif. Logo diberi warna pink agar mencolok. Daftar menu (ul li a) diberi efek hover dengan perubahan warna dan animasi garis bawah menggunakan pseudo-element ::after.
-```.content {
+</nav>
+```
+```
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7e3e7;
+  padding: 15px 40px;
+  border-bottom: 3px solid #f5c7ce;
+}
+
+nav .logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #d96c91;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+```
+Navigasi memuat logo dan menu horizontal. Flexbox menjaga posisi logo di kiri dan menu di kanan. Link diberi efek hover: warna berubah pink dan muncul garis animasi bawah.
+```
+.content {
   padding: 40px;
   flex: 1;
 }
@@ -54,7 +90,6 @@ Navbar memuat logo di kiri dan menu navigasi di kanan. CSS mengatur nav mengguna
   display: none;
   animation: fadeIn 0.6s ease;
 }
-
 .active {
   display: block;
 }
@@ -62,14 +97,18 @@ Navbar memuat logo di kiri dan menu navigasi di kanan. CSS mengatur nav mengguna
 @keyframes fadeIn {
   from {opacity: 0; transform: translateY(10px);}
   to {opacity: 1; transform: translateY(0);}
-}```
-Semua konten ditempatkan dalam div .content. Masing-masing section awalnya disembunyikan (display: none), lalu hanya section dengan class .active yang terlihat. Animasi fadeIn membuat transisi muncul lebih halus dengan perubahan opacity dan posisi.
+}
+```
+Konten diatur dalam .content. Masing-masing .section hanya muncul saat memiliki class .active. Animasi fadeIn membuat pergantian antar section lebih halus.
+```
 <div id="home" class="section active">
   <h2>Selamat Datang 👋</h2>
-  <p>Selamat datang di portofolio pribadi saya. Website ini memuat informasi singkat mengenai latar belakang, hobi, serta beberapa dokumentasi yang mencerminkan perjalanan saya dalam bidang akademik maupun kehidupan sehari-hari.</p>
+  <p>Selamat datang di portofolio pribadi saya...</p>
 </div>
-Section #home adalah halaman sambutan pertama. Teks judul ditampilkan besar dengan warna pink, sementara paragraf di bawahnya berisi deskripsi singkat tentang isi portofolio
-```<div id="about" class="section">
+```
+Halaman awal dengan sambutan singkat. Default aktif dengan class .active.
+```
+<div id="about" class="section">
   <div class="about-container">
     <img src="tika.jpg" alt="Foto Tika">
     <div class="about-text">
@@ -77,20 +116,39 @@ Section #home adalah halaman sambutan pertama. Teks judul ditampilkan besar deng
       <p>Perkenalkan, nama saya <b>Hartika Ansar</b> ...</p>
     </div>
   </div>
-</div>```
-Bagian About Me menampilkan foto di kiri dan teks di kanan menggunakan grid. Foto diberi border pink, bayangan, dan efek hover zoom. Teks berisi informasi pribadi dengan heading berwarna pink dan paragraf justify agar rapi.
-```<div id="contact" class="section">
-  <h2>Kontak</h2>
-  <p>Anda dapat menghubungi saya melalui beberapa platform berikut:</p>
-  <div class="contact-links">
-    <a href="https://wa.me/6282271512957" target="_blank">WhatsApp</a>
-    <a href="https://instagram.com/hrtikansar" target="_blank">Instagram</a>
-    <a href="https://www.linkedin.com/in/hartikansar" target="_blank">LinkedIn</a>
-    <a href="https://github.com/hartikansar" target="_blank">GitHub</a>
-    <a href="mailto:hartikansar14@gmail.com" target="_blank">Email</a>
+</div>
+```
+Menampilkan foto dan teks dalam grid. Foto diberi border pink, bayangan, serta efek zoom saat hover. Teks rapi dengan text-align: justify.
+```
+<div id="funfact" class="section">
+  <h2>Fun Fact ✨</h2>
+  <p>Di sela-sela kesibukan akademik...</p>
+  <p>Saya juga memiliki impian...</p>
+</div>
+```
+Fakta unik tentang penulis, ditata di tengah halaman dengan teks rapi.
+```
+<div id="gallery" class="section">
+  <h2>Galeri 📸</h2>
+  <button class="btn-gallery" onclick="toggleGallery()">Lihat Galeri</button>
+  <div id="galleryGrid" class="gallery-grid">
+    <img src="foto1.jpg" alt="Foto 1">
+    <img src="foto2.jpg" alt="Foto 2">
   </div>
-</div>```
-Bagian kontak menyediakan link ke beberapa platform. Tautan ditampilkan sebagai tombol bundar dengan warna pink dan efek hover naik sedikit.
+</div>
+```
+Galeri foto ditampilkan dengan tombol. Menggunakan grid responsif dengan efek hover.
+```
+<div id="contact" class="section">
+  <h2>Kontak</h2>
+  <div class="contact-links">
+    <a href="https://wa.me/62822..." target="_blank">WhatsApp</a>
+    <a href="https://instagram.com/..." target="_blank">Instagram</a>
+  </div>
+</div>
+```
+Link ke platform sosial ditampilkan sebagai tombol bulat dengan warna pink. Saat hover berubah warna dan sedikit naik.
+
 
 
 
