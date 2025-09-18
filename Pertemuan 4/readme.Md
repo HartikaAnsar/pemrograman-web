@@ -13,8 +13,9 @@ html
   </style>
 </head>
 ```
-Blok ini adalah kerangka utama dokumen HTML.
-<!DOCTYPE html> mendeklarasikan standar HTML5. Tag <html lang="id"> menandakan bahasa utama dokumen adalah bahasa Indonesia. Di dalam <head>, terdapat <meta charset="UTF-8"> agar semua karakter bisa terbaca. <title> menampilkan judul tab browser, sedangkan <style> menampung aturan CSS internal.
+Bagian ini adalah kerangka utama dokumen HTML. <!DOCTYPE html> menandakan bahwa file ini menggunakan standar HTML5, yang memastikan browser menafsirkan elemen dengan benar. Tag <html lang="id"> memberitahu bahwa bahasa utama halaman adalah Bahasa Indonesia. Di dalam <head> terdapat <meta charset="UTF-8"> agar halaman bisa menampilkan berbagai karakter (huruf, angka, simbol, emoji). <title> menentukan teks yang muncul pada tab browser. Sedangkan <style> berisi aturan CSS internal, jadi semua styling langsung ditulis di dalam file ini tanpa memanggil file CSS terpisah.
+
+# 2. CSS Global dan Body
 ```
 * {
   margin: 0;
@@ -31,7 +32,9 @@ body {
   min-height: 100vh;
 }
 ```
-Selector * dipakai untuk reset CSS agar konsisten. Pada body, latar belakang diberi gradien pink lembut dan diatur dengan flexbox supaya .container berada di tengah layar.
+Selector * adalah global reset: semua elemen diatur ulang agar margin dan padding bawaan dihapus. Properti box-sizing: border-box membuat perhitungan lebar/tinggi elemen jadi lebih konsisten. Font default seluruh halaman diubah ke Arial. Pada body, latar belakang diberi gradien linear dengan warna pink lembut sehingga tampak modern. Layout memakai Flexbox dengan justify-content: center dan align-items: center agar konten berada tepat di tengah layar. min-height: 100vh memastikan tinggi body selalu penuh mengikuti layar.
+
+# 3. Container
 ```
 .container {
   width: 85%;
@@ -44,7 +47,9 @@ Selector * dipakai untuk reset CSS agar konsisten. Pada body, latar belakang dib
   flex-direction: column;
 }
 ```
-.container membungkus seluruh isi web. Ukurannya fleksibel dengan max-width agar nyaman di semua layar. Warna putih, sudut membulat, dan bayangan memberi kesan modern.
+.container berfungsi sebagai pembungkus utama semua isi halaman. Lebarnya fleksibel (85%) tapi dibatasi maksimal 1100px agar tetap nyaman dilihat di layar besar. Latar belakang putih memberi kontras dengan gradien body. Sudut kotak dibuat membulat (border-radius: 16px) dan ditambah bayangan (box-shadow) untuk menambah kesan elegan. overflow: hidden mencegah isi meluber keluar batas. Layout diatur dengan flex-direction: column supaya isi tersusun dari atas ke bawah.
+
+# 4. Navigasi
 ```
 <nav>
   <div class="logo">Portofolio Tika</div>
@@ -79,7 +84,9 @@ nav ul {
   gap: 25px;
 }
 ```
-Navigasi memuat logo dan menu horizontal. Flexbox menjaga posisi logo di kiri dan menu di kanan. Link diberi efek hover: warna berubah pink dan muncul garis animasi bawah.
+Navbar menampilkan logo di kiri dan menu navigasi di kanan. Flexbox (justify-content: space-between) menjaga agar logo dan daftar menu memiliki jarak rapi. Latar belakang pink muda dengan garis bawah pink tua memberi identitas visual. Logo diberi ukuran lebih besar dan warna mencolok. Daftar menu (ul) ditata horizontal menggunakan flex, jarak antar item diatur dengan gap. Setiap link menu punya event onclick yang memanggil fungsi JavaScript untuk menampilkan section tertentu.
+
+# 5. Layout Konten
 ```
 .content {
   padding: 40px;
@@ -99,14 +106,18 @@ Navigasi memuat logo dan menu horizontal. Flexbox menjaga posisi logo di kiri da
   to {opacity: 1; transform: translateY(0);}
 }
 ```
-Konten diatur dalam .content. Masing-masing .section hanya muncul saat memiliki class .active. Animasi fadeIn membuat pergantian antar section lebih halus.
+.content berfungsi sebagai wadah isi halaman dengan padding luas. Semua .section disembunyikan (display: none) kecuali yang sedang aktif (.active). Saat section ditampilkan, ada animasi fadeIn yang mengubah opacity dari 0 ke 1 dan sedikit pergeseran posisi agar transisinya lembut.
+
+# 6. Home Section
 ```
 <div id="home" class="section active">
   <h2>Selamat Datang 👋</h2>
   <p>Selamat datang di portofolio pribadi saya...</p>
 </div>
 ```
-Halaman awal dengan sambutan singkat. Default aktif dengan class .active.
+Section pertama (#home) tampil secara default karena sudah diberi class .active. Judul besar menyapa pengunjung dengan emoji 👋 untuk kesan ramah. Paragraf di bawahnya berisi deskripsi singkat isi website.
+
+# 7.About Me
 ```
 <div id="about" class="section">
   <div class="about-container">
@@ -118,15 +129,18 @@ Halaman awal dengan sambutan singkat. Default aktif dengan class .active.
   </div>
 </div>
 ```
-Menampilkan foto dan teks dalam grid. Foto diberi border pink, bayangan, serta efek zoom saat hover. Teks rapi dengan text-align: justify.
-```
+Section ini memperkenalkan pemilik website. Layout memakai CSS Grid dengan dua kolom: foto di kiri (200px) dan teks di kanan (1fr). gap: 30px memberi jarak antar elemen. Foto bisa diberi efek tambahan (border pink, shadow, zoom hover), sedangkan teks diatur agar rata kanan-kiri untuk tampilan rapi. Heading menggunakan warna pink agar konsisten dengan tema.
+
+# 8.Fun Fact
 <div id="funfact" class="section">
   <h2>Fun Fact ✨</h2>
   <p>Di sela-sela kesibukan akademik...</p>
   <p>Saya juga memiliki impian...</p>
 </div>
 ```
-Fakta unik tentang penulis, ditata di tengah halaman dengan teks rapi.
+Bagian ini menampilkan fakta unik. Semua teks disejajarkan ke tengah (text-align: center). Heading menggunakan emoji ✨ untuk memberi kesan ringan dan fun. Biasanya berisi hal personal seperti hobi, kebiasaan, atau mimpi.
+
+# 9. Galeri
 ```
 <div id="gallery" class="section">
   <h2>Galeri 📸</h2>
@@ -137,7 +151,9 @@ Fakta unik tentang penulis, ditata di tengah halaman dengan teks rapi.
   </div>
 </div>
 ```
-Galeri foto ditampilkan dengan tombol. Menggunakan grid responsif dengan efek hover.
+Galeri menampilkan foto-foto dalam grid responsif. Defaultnya tersembunyi (display: none) lalu ditampilkan saat tombol ditekan. Grid menggunakan auto-fit dan minmax(200px, 1fr) sehingga jumlah kolom menyesuaikan ukuran layar. Efek hover pada gambar bisa ditambahkan untuk kesan interaktif.
+
+10. Kontak
 ```
 <div id="contact" class="section">
   <h2>Kontak</h2>
@@ -147,8 +163,23 @@ Galeri foto ditampilkan dengan tombol. Menggunakan grid responsif dengan efek ho
   </div>
 </div>
 ```
-Link ke platform sosial ditampilkan sebagai tombol bulat dengan warna pink. Saat hover berubah warna dan sedikit naik.
+LBagian kontak menyediakan link ke berbagai platform (WhatsApp, Instagram, LinkedIn, GitHub, Email). Layout flex membuat semua link sejajar dengan jarak seimbang. Tautan biasanya diberi style tombol bundar dengan background pink, dan saat hover sedikit berubah warna atau naik untuk memberikan feedback visual.
 
+# 11. JavaScript
+```
+<script>
+  function showSection(id) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
 
+  function toggleGallery() {
+    document.getElementById('galleryGrid').classList.toggle('active');
+  }
+</script>
+```
+JavaScript menambahkan interaktivitas.
 
-
+- showSection(id) berfungsi untuk navigasi: semua section disembunyikan (remove('active')), lalu hanya section yang dipilih yang ditampilkan (add('active')).
+- toggleGallery() dipakai untuk mengontrol galeri: class .active ditambahkan/dihapus secara bergantian sehingga grid foto bisa muncul atau hilang saat tombol ditekan.
