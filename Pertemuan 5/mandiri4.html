@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Bangun Ruang</title>
+</head>
+<body>
+  <h2>4. Hitung Bangun Ruang</h2>
+
+  <!-- Volume Kubus -->
+  <h3>Volume Kubus</h3>
+  <input type="number" id="sisi" placeholder="Panjang sisi">
+  <button onclick="kubus()">Hitung</button>
+  <p id="volKubus"></p>
+
+  <!-- Volume Balok -->
+  <h3>Volume Balok</h3>
+  <input type="number" id="p" placeholder="Panjang">
+  <input type="number" id="l" placeholder="Lebar">
+  <input type="number" id="t" placeholder="Tinggi">
+  <button onclick="balok()">Hitung</button>
+  <p id="volBalok"></p>
+
+  <!-- Volume Bola -->
+  <h3>Volume Bola</h3>
+  <input type="number" id="r" placeholder="Jari-jari">
+  <button onclick="bola()">Hitung</button>
+  <p id="volBola"></p>
+
+  <script>
+    function kubus() {
+      let s = document.getElementById("sisi").value;
+      let volume = s * s * s;
+      document.getElementById("volKubus").innerHTML = "Volume Kubus = " + volume;
+    }
+
+    function balok() {
+      let p = document.getElementById("p").value;
+      let l = document.getElementById("l").value;
+      let t = document.getElementById("t").value;
+      let volume = p * l * t;
+      document.getElementById("volBalok").innerHTML = "Volume Balok = " + volume;
+    }
+
+    function bola() {
+      let r = document.getElementById("r").value;
+      let volume = (4/3) * Math.PI * Math.pow(r, 3);
+      document.getElementById("volBola").innerHTML = "Volume Bola = " + volume.toFixed(2);
+    }
+  </script>
+</body>
+</html>
