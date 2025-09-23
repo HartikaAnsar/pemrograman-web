@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Portofolio Tika</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5c7ce, #f7e3e7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 85%;
+      max-width: 1100px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ========== CSS NAVIGASI ========== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f7e3e7;
+      padding: 15px 40px;
+      border-bottom: 3px solid #f5c7ce;
+    }
+
+    nav .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #d96c91;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      position: relative;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 0%;
+      background: #d96c91;
+      transition: 0.3s;
+      margin-top: 5px;
+    }
+
+    nav ul li a:hover {
+      color: #d96c91;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* ========== CSS LAYOUT ========== */
+    .content {
+      padding: 40px;
+      flex: 1;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+    .active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Layout Home */
+    #home {
+      text-align: center;
+    }
+    #home h2 {
+      font-size: 28px;
+      color: #d96c91;
+      margin-bottom: 10px;
+    }
+    #home p {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Layout About Me */
+    .about-container {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* ========== CSS IMAGE ========== */
+    .about-container img {
+      width: 180px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 4px solid #f5c7ce;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .about-container img:hover {
+      transform: scale(1.05);
+    }
+
+    .about-text {
+      max-width: 600px;
+      font-size: 16px;
+      color: #444;
+      line-height: 1.7;
+      text-align: justify;
+    }
+    .about-text h2 {
+      color: #d96c91;
+      margin-bottom: 15px;
+    }
+
+    /* Layout Fun Fact */
+    #funfact {
+      text-align: center;
+    }
+    #funfact p {
+      max-width: 650px;
+      margin: 20px auto 0;
+      font-size: 17px;
+      color: #444;
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    /* Layout Galeri */
+    #gallery {
+      text-align: center;
+    }
+    .btn-gallery {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #d96c91;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 20px;
+    }
+    .btn-gallery:hover {
+      background: #bf5477;
+    }
+    .gallery-grid {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1 / 1;   /* Biar otomatis kotak */
+      object-fit: cover;      /* Crop bagian lebih */
+      border-radius: 16px;    /* Sudut membulat */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s, filter 0.3s;
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+      filter: brightness(110%);
+    }
+    .gallery-grid.active {
+      display: grid;
+    }
+
+    /* Layout Contact */
+    #contact {
+      text-align: center;
+    }
+    #contact p {
+      font-size: 16px;
+      color: #444;
+      margin-top: 10px;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+    .contact-links a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      background: #d96c91;
+      padding: 12px 20px;
+      border-radius: 30px;
+      transition: 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .contact-links a:hover {
+      background: #bf5477;
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navbar -->
+    <nav>
+      <div class="logo">Portofolio Tika</div>
+      <ul>
+        <li><a href="#" onclick="showSection('home')">Home</a></li>
+        <li><a href="#" onclick="showSection('about')">About Me</a></li>
+        <li><a href="#" onclick="showSection('funfact')">Fun Fact</a></li>
+        <li><a href="#" onclick="showSection('gallery')">Galeri</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Konten -->
+    <div class="content">
+      <!-- HOME -->
+      <div id="home" class="section active">
+        <h2>Selamat Datang 👋</h2>
+        <p>Selamat datang di portofolio pribadi saya. Website ini memuat informasi singkat mengenai latar belakang, hobi, serta beberapa dokumentasi yang mencerminkan perjalanan saya dalam bidang akademik maupun kehidupan sehari-hari.</p>
+      </div>
+
+      <!-- ABOUT ME -->
+      <div id="about" class="section">
+        <div class="about-container">
+          <img src="tika.jpg" alt="Foto Tika">
+          <div class="about-text">
+            <h2>Tentang Saya</h2>
+            <p>
+              Perkenalkan, nama saya <b>Hartika Ansar</b>, yang akrab disapa <b>Tika</b>. Saya lahir pada <b>14 Maret 2006</b> dan berasal dari <b>Kabupaten Enrekang</b>. Saat ini, saya tengah menempuh pendidikan di <b>Universitas Negeri Makassar</b> dengan fokus studi pada jurusan <b>Teknik Komputer</b>.
+            </p>
+            <p>
+              Ketertarikan saya pada bidang teknologi bermula ketika mendapat dorongan dari keluarga untuk mencoba sesuatu yang baru. Walaupun sebelumnya saya tidak memiliki latar belakang di bidang teknologi informasi, dorongan tersebut memotivasi saya untuk berani mengambil jurusan <b>Teknik Komputer</b>. 
+            </p>
+            <p>
+              Seiring berjalannya waktu, tantangan dalam mempelajari hal-hal baru justru membuat saya semakin bersemangat untuk terus berkembang. Dari pengalaman ini, saya belajar bahwa keberanian untuk mencoba hal baru dapat membuka peluang besar dalam perjalanan hidup.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FUN FACT -->
+      <div id="funfact" class="section">
+        <h2>Fun Fact ✨</h2>
+        <p>
+          Di sela-sela kesibukan akademik, saya memiliki beberapa kebiasaan dan minat pribadi yang cukup menarik. Membaca novel, khususnya melalui platform Wattpad, merupakan salah satu kegiatan favorit saya untuk mengisi waktu luang. Selain itu, saya gemar mendengarkan musik dengan nuansa emosional meskipun tidak sedang berada dalam suasana hati yang serupa, karena musik menjadi sarana hiburan sekaligus penenang.
+        </p>
+        <p>
+          Saya juga memiliki impian untuk mencapai kemandirian finansial di masa depan. Namun, di sisi lain, saya tetap menikmati momen sederhana untuk beristirahat dan bersantai. Aktivitas lain yang sering saya lakukan adalah mengikuti berbagai konten kreatif di TikTok. Adapun warna <b>pink</b> menjadi salah satu warna favorit saya karena mencerminkan kelembutan dan keceriaan.
+        </p>
+      </div>
+
+      <!-- GALERI -->
+      <div id="gallery" class="section">
+        <h2>Galeri 📸</h2>
+        <button class="btn-gallery" onclick="toggleGallery()">Lihat Galeri</button>
+        <div id="galleryGrid" class="gallery-grid">
+          <img src="foto1.jpg" alt="Foto 1">
+          <img src="foto2.jpg" alt="Foto 2">
+          <img src="foto3.jpg" alt="Foto 3">
+          <img src="foto4.jpg" alt="Foto 4">
+          <img src="foto5.jpg" alt="Foto 5">
+          <img src="foto6.jpg" alt="Foto 6">
+          <img src="foto7.jpg" alt="Foto 7">
+          <img src="foto8.jpg" alt="Foto 8">
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div id="contact" class="section">
+        <h2>Kontak</h2>
+        <p>Anda dapat menghubungi saya melalui beberapa platform berikut:</p>
+        <div class="contact-links">
+          <a href="https://wa.me/6282271512957" target="_blank">WhatsApp</a>
+          <a href="https://instagram.com/hrtikansar" target="_blank">Instagram</a>
+          <a href="https://www.linkedin.com/in/hartikansar" target="_blank">LinkedIn</a>
+          <a href="https://github.com/hartikansar" target="_blank">GitHub</a>
+          <a href="mailto:hartikansar14@gmail.com" target="_blank">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function toggleGallery() {
+      document.getElementById('galleryGrid').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
