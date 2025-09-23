@@ -1,6 +1,7 @@
 # Laporan Praktikum Pertemuan 5
 
-## 2.JavaScript pada file HTML
+## 2. JavaScript pada file HTML
+## a. Menggunakan tag <SCRIPT>,  
 ### Kode Program
 ```html
 <HTML> 
@@ -26,7 +27,7 @@ Dari sini bisa dianalisis bahwa letak penulisan script berpengaruh pada waktu ek
 # outputnya :
 ![Output Program](out2a.jpg.png)
 
-## 2b. file eksternal
+## b. Menggunakan File Eksternal
 ```
 <SCRIPT LANGUAGE="Javascript" SRC="url/file.js"> </SCRIPT>
 ```
@@ -37,7 +38,7 @@ Bagian <SCRIPT LANGUAGE="Javascript" SRC="file.js"></SCRIPT> berfungsi memanggil
 # outputnya 
 ![Output Program](out2b.jpg.png)
 
-# 2.c.event tertentu
+# c.event tertentu
 ```
 <!DOCTYPE html> 
 <html> 
@@ -70,7 +71,7 @@ Di dalam fungsi ini, JavaScript mengambil elemen <div> dengan document.getElemen
 # output :
 ![Output Program](out2c.jpg.png)
 
-## 2.d contoh sederhana
+## d. contoh sederhana
 ```
 <HTML> 
 <HEAD><TITLE> contoh sederhana JavaScript</TITLE></HEAD> 
@@ -89,7 +90,7 @@ Dari contoh ini terlihat bahwa document.write() adalah cara paling sederhana unt
 # output :
 ![Output Program](out2d.jpg.jpg)
 
-# 3 Masukkan data
+## 3 Masukkan data
 ```
 <HTML> 
 <HEAD> 
@@ -115,7 +116,7 @@ Contoh ini memperlihatkan dasar dari interaksi antara pengguna dan JavaScript, d
 # output :
 ![Output Program](out3.jpg.png)
 
-# 4. Peringatan dan Konfirmasi
+## 4. Peringatan dan Konfirmasi
 ```
 <HTML> 
 <HEAD> 
@@ -135,7 +136,8 @@ Kode ini digunakan untuk menampilkan kotak pesan sederhana menggunakan window.al
 # output :
 ![Output Program](out4.jpg.png)
 
-# 5. a variabel
+## 5. Variabel
+# a. Mendeklarasikan Variabel
 ```
 <script language="Javascript">  
 <!--  
@@ -151,7 +153,8 @@ Kode ini digunakan untuk mendeklarasikan variabel di JavaScript, yaitu VariabelK
 # output :
 ![Output Program](out5a.jpg.png)
 
-# 5. b. global dan lokal
+## 5. Variabel
+# b. Global dan Lokal
 ```
 <script language="JavaScript">  
 var a = 12;  
@@ -172,27 +175,7 @@ Kode ini digunakan untuk memperlihatkan cara membuat fungsi di JavaScript. Varia
 # output :
 ![Output Program](out5b.jpg.png)
 
-# 5.c.
-```
-<SCRIPT language="Javascript">  
-<!--  
-var a = 12;  
-var b = 4;  
-function PerkalianDengan2(b) {  
-var a = b * 2;  
-return a;  
-} 
-document.write("Dua kali dari ",b," adalah", PerkalianDengan2(b));
-document.write("Nilai dari a adalah",a);  
-// -->  
-</SCRIPT>
-```
-# Analisis :
-Kode JavaScript ini digunakan untuk menghitung dua kali nilai suatu angka dengan menggunakan fungsi. Variabel a dan b dideklarasikan secara global dengan nilai 12 dan 4. Fungsi PerkalianDengan2 menerima parameter b dan membuat variabel lokal a yang nilainya b * 2, lalu mengembalikannya. Saat dipanggil dengan PerkalianDengan2(b), hasilnya 8, sedangkan variabel global a tetap 12. Kode ini menunjukkan perbedaan antara variabel global dan lokal serta penggunaan fungsi sederhana.
-# output :
-![Output Program](out5c.jpg.png)
-
-# 7. Konversi Tipe Data
+## 7. Konversi Tipe Data
 ```
 <html> 
 <head> 
@@ -232,7 +215,7 @@ Kode ini digunakan untuk mendemonstrasikan konversi tipe data string menjadi ang
 # output :
 ![Output Program](out7.jpg.png)
 
-# 8. operator matematika
+## 8. operator matematika
 ```
 <HTML> 
 <HEAD> 
@@ -259,7 +242,7 @@ Kode ini digunakan untuk melakukan dan menampilkan operasi matematika sederhana 
 # output :
 ![Output Program](out8.jpg.png)
 
-# 9. operator logika
+## 9. operator logika
 ```
 <HTML> 
 <HEAD> 
@@ -281,7 +264,8 @@ ode ini digunakan untuk mendemonstrasikan penggunaan operator ternary (? :) di J
 # output :
 ![Output Program](out9.jpg.png)
 
-# no 1 mandiri
+## TUGAS MANDIRI
+# 1. Buatlah Script Mengkonversi Tipe Data 
 ```
 <!DOCTYPE html>
 <html lang="id">
@@ -319,7 +303,7 @@ Selain itu, kode ini juga mengekstrak karakter pertama dari string menggunakan c
 # output :
 ![Output Program](mandiri1.jpg.png)
 
-# Mandiri no 2
+# 2. Buatlah Script menggunakan Tipe data dalam Array. 
 ```
 <!DOCTYPE html>
 <html lang="id">
@@ -354,7 +338,7 @@ Fungsi ini kemudian menampilkan isi ketiga array di halaman web menggunakan docu
 # output :
 ![Output Program](mandiri2.jpg.png)
 
-# Mandiri no 3
+# 3. Buatlah calculator sederhana pada menggunakan java script, menggunakan texfield dan tombol 
 # Analisi :
 Kode HTML dan JavaScript ini digunakan untuk membuat kalkulator sederhana yang dapat melakukan operasi penjumlahan, pengurangan, perkalian, dan pembagian. Pengguna memasukkan dua angka ke dalam input angka1 dan angka2, kemudian menekan tombol operasi yang diinginkan (+, -, *, atau /). Fungsi hitung(op) akan mengambil nilai dari kedua input, mengubahnya menjadi angka desimal menggunakan parseFloat, dan menyimpan hasil perhitungan ke variabel res sesuai operator yang dipilih.
 
@@ -362,7 +346,7 @@ Setelah perhitungan selesai, hasil ditampilkan di halaman web melalui document.g
 # output :
 ![Output Program](mandiri3.jpg.png)
 
-# Mandiri no 4
+# 4. Buatlah minimal 3 hitungan menggunakan java script menggunakan rumus bangun ruang. 
 # Analisis :
 Kode HTML dan JavaScript ini digunakan untuk menghitung volume beberapa bangun ruang, yaitu kubus, balok, dan bola. Untuk kubus, pengguna memasukkan panjang sisi, kemudian fungsi kubus() menghitung volume dengan rumus sisi × sisi × sisi dan menampilkannya di halaman. Untuk balok, pengguna memasukkan panjang, lebar, dan tinggi, kemudian fungsi balok() menghitung volume dengan rumus panjang × lebar × tinggi dan menampilkannya.
 
