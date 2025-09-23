@@ -1,7 +1,6 @@
 # Laporan Praktikum Pertemuan 5
 
-## 1. 2a.tagscript.html
-
+## 2.JavaScript pada file HTML
 ### Kode Program
 ```html
 <HTML> 
