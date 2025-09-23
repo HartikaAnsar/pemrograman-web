@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Konversi Tipe Data</title>
+</head>
+<body>
+  <h2>1. Konversi Tipe Data</h2>
+  <input type="text" id="val" placeholder="Masukkan nilai">
+  <button onclick="konversi()">Konversi</button>
+  <p id="out"></p>
+
+  <script>
+    function konversi() {
+      let val = document.getElementById("val").value;
+      let num = Number(val);
+      let bool = Boolean(val);
+      let str = val.toString();
+      let ch = val.length > 0 ? val.charAt(0) : "(kosong)";
+      document.getElementById("out").innerHTML =
+        "String → Number: " + num + "<br>" +
+        "String → Boolean: " + bool + "<br>" +
+        "Value → String: " + str + "<br>" +
+        "String → Char: " + ch;
+    }
+  </script>
+</body>
+</html>

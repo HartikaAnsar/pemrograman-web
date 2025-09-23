@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Array</title>
+</head>
+<body>
+  <h2>2. Contoh Array</h2>
+  <button onclick="tampilkan()">Tampilkan Array</button>
+  <p id="hasil"></p>
+
+  <script>
+    function tampilkan() {
+      let buah = ["Apel", "Jeruk", "Mangga", "Pisang"];
+      let angka = [10, 20, 30, 40];
+      let campur = ["Tika", 22, true, 3.14];
+
+      document.getElementById("hasil").innerHTML =
+        "Array Buah: " + buah.join(", ") + "<br>" +
+        "Array Angka: " + angka.join(", ") + "<br>" +
+        "Array Campuran: " + campur.join(", ");
+    }
+  </script>
+</body>
+</html>
