@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - BFC Bintang Fried Chicken</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            font-size: 14px;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%);
+            opacity: 0.9;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,204,0,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 204, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-circle {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff0000, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 10px;
+            color: #ffcc00;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ffcc00);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        nav a:hover::before,
+        nav a.active::before {
+            left: 0;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* CART BUTTON */
+        .cart-button {
+            position: relative;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            padding: 6px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 12px rgba(255, 0, 0, 0.5);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ffcc00;
+            color: #000;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            padding: 30px 20px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff0000, #ffcc00, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .page-hero p {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* CONTAINER UTAMA */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff0000, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 kolom tetap */
+    gap: 10px;
+    margin: 15px 0;
+}
+
+
+
+ .menu-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    font-size: 12px; /* font lebih kecil */
+}
+
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 0, 0, 0.3);
+            border-color: #ffcc00;
+        }
+
+        /* GAMBAR */
+        .menu-image-container {
+            width: 100%;
+            height: 130px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(255,204,0,0.2));
+        }
+
+        .menu-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s;
+        }
+
+        .menu-card:hover .menu-image-container img {
+            transform: scale(1.05);
+        }
+
+        .menu-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            background: linear-gradient(135deg, rgba(255,0,0,0.3), rgba(255,204,0,0.3));
+        }
+
+        /* CONTENT MENU */
+        .menu-content {
+            padding: 16px;
+        }
+
+        .menu-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .badge-bestseller {
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: #000;
+        }
+
+        .menu-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffcc00;
+            margin-bottom: 6px;
+        }
+
+        .menu-description {
+            color: #ccc;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .menu-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 204, 0, 0.2);
+        }
+
+        .price-section {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .price-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .price-label {
+            font-size: 10px;
+            color: #aaa;
+        }
+
+        .price-value {
+            font-size: 14px;
+            font-weight: 800;
+            color: #ff0000;
+        }
+
+        .order-section {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .size-selector {
+            display: flex;
+            gap: 3px;
+        }
+
+        .size-btn {
+            padding: 3px 8px;
+            background: rgba(255, 204, 0, 0.2);
+            border: 1px solid rgba(255, 204, 0, 0.5);
+            border-radius: 5px;
+            color: #ffcc00;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .size-btn:hover,
+        .size-btn.active {
+            background: #ffcc00;
+            color: #000;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 18px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 12px rgba(255, 0, 0, 0.5);
+        }
+
+        /* CART SIDEBAR */
+        .cart-sidebar {
+            position: fixed;
+            right: -320px;
+            top: 0;
+            width: 320px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-left: 2px solid rgba(255, 204, 0, 0.3);
+            transition: all 0.4s;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 16px;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 18px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-cart:hover {
+            transform: rotate(90deg);
+        }
+
+        .cart-items {
+            padding: 12px;
+        }
+
+        .cart-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 6px;
+        }
+
+        .cart-item-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffcc00;
+        }
+
+        .cart-item-size {
+            font-size: 10px;
+            color: #aaa;
+        }
+
+        .remove-item {
+            background: #ff0000;
+            border: none;
+            color: #fff;
+            padding: 3px 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .cart-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .qty-btn {
+            background: rgba(255, 204, 0, 0.2);
+            border: 1px solid #ffcc00;
+            color: #ffcc00;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .qty-btn:hover {
+            background: #ffcc00;
+            color: #000;
+        }
+
+        .cart-total {
+            padding: 12px;
+            border-top: 2px solid rgba(255, 204, 0, 0.3);
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffcc00;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: #000;
+            border: none;
+            padding: 10px;
+            border-radius: 18px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.5);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 30px 12px;
+            color: #aaa;
+        }
+
+        .empty-cart-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        /* CSS tambahan untuk cart item price */
+        .cart-item-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffcc00;
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid rgba(255, 204, 0, 0.3);
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 26px; }
+            .page-hero { padding: 20px 15px 15px; }
+            .menu-grid { 
+                grid-template-columns: 1fr; 
+                gap: 15px;
+            }
+            .cart-sidebar { width: 100%; right: -100%; }
+            nav ul { flex-direction: column; gap: 6px; }
+            .header-content { 
+                flex-direction: column; 
+                gap: 12px;
+                padding: 8px 15px;
+            }
+            .section-title { font-size: 22px; }
+            .container { padding: 15px; }
+            
+            .menu-image-container { height: 110px; }
+            .menu-image-placeholder { font-size: 35px; }
+        }
+        
+        @media (max-width: 480px) {
+            .page-hero h1 { font-size: 22px; }
+            .section-title { font-size: 20px; }
+            .menu-grid { gap: 12px; }
+            .menu-content { padding: 12px; }
+            .menu-image-container { height: 100px; }
+            .menu-image-placeholder { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-circle">🍗</div>
+                <div class="logo-text">
+                    <h1>BFC</h1>
+                    <p class="tagline">SENSASI PEDAS YANG UNIK</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="menu.html" class="active">Menu</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                    <li>
+                        <div class="cart-button" onclick="toggleCart()">
+                            🛒 Keranjang
+                            <span class="cart-count" id="cartCount">0</span>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <h1>Menu Kami</h1>
+        <p>Pilih & Pesan Favoritmu Sekarang!</p>
+    </div>
+
+    <div class="container">
+        <!-- Original Crispy -->
+        <h2 class="section-title">🍗 ORIGINAL CRISPY</h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="menu-image-container">
+                    <img src="images/original-crispy.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="menu-image-placeholder" style="display: none;">🍗</div>
+                </div>
+                <div class="menu-content">
+                    <span class="menu-badge">SIGNATURE</span>
+                    <h3 class="menu-title">AYAM</h3>
+                    <div class="menu-footer">
+                        <div class="price-section">
+                            <div class="price-item">
+                                <span class="price-label">Reguler:</span>
+                                <span class="price-value">Rp 8.000</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Jumbo:</span>
+                                <span class="price-value">Rp 12.000</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="order-section">
+                        <div class="size-selector">
+                            <button class="size-btn active" data-size="reguler" data-price="16000">Reguler</button>
+                            <button class="size-btn" data-size="jumbo" data-price="20000">Jumbo</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Original Crispy', this)">
+                            🛒 Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saus Spesial -->
+        <h2 class="section-title">🔥 AYAM DENGAN SAUS SPESIAL</h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="menu-image-container">
+                      <img src="images/firechicken.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="menu-image-placeholder">🔥</div>
+                </div>
+                <div class="menu-content">
+                    <span class="menu-badge badge-bestseller">BEST SELLER</span>
+                    <h3 class="menu-title">FIRE CHICKEN</h3>
+                    <p class="menu-description">Ayam dengan saus pedas fire yang menggigit!</p>
+                    <div class="menu-footer">
+                        <div class="price-section">
+                            <div class="price-item">
+                                <span class="price-label">Reguler:</span>
+                                <span class="price-value">Rp 18.000</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Jumbo:</span>
+                                <span class="price-value">Rp 22.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-section">
+                        <div class="size-selector">
+                            <button class="size-btn active" data-size="reguler" data-price="18000">Reguler</button>
+                            <button class="size-btn" data-size="jumbo" data-price="22000">Jumbo</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Fire Chicken', this)">
+                            🛒 Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="menu-image-container">
+                        <img src="images/chickenteriyaki.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="menu-image-placeholder">🔥</div>
+                    <div class="menu-image-placeholder">🍯</div>
+                </div>
+                <div class="menu-content">
+                    <span class="menu-badge">POPULER</span>
+                    <h3 class="menu-title">CHICKEN TERIYAKI</h3>
+                    <p class="menu-description">Ayam dengan saus teriyaki manis khas Jepang</p>
+                    <div class="menu-footer">
+                        <div class="price-section">
+                            <div class="price-item">
+                                <span class="price-label">Reguler:</span>
+                                <span class="price-value">Rp 18.000</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Jumbo:</span>
+                                <span class="price-value">Rp 22.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-section">
+                        <div class="size-selector">
+                            <button class="size-btn active" data-size="reguler" data-price="18000">Reguler</button>
+                            <button class="size-btn" data-size="jumbo" data-price="22000">Jumbo</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Chicken Teriyaki', this)">
+                            🛒 Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="menu-image-container">
+                       <img src="images/chickenblackpaper.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="menu-image-placeholder">🔥</div>
+                    <div class="menu-image-placeholder">🍯</div>
+                    <div class="menu-image-placeholder">⚫</div>
+                </div>
+                <div class="menu-content">
+                    <span class="menu-badge">REKOMENDASI</span>
+                    <h3 class="menu-title">CHICKEN BLACKPAPER</h3>
+                    <p class="menu-description">Ayam dengan saus blackpepper pedas gurih</p>
+                    <div class="menu-footer">
+                        <div class="price-section">
+                            <div class="price-item">
+                                <span class="price-label">Reguler:</span>
+                                <span class="price-value">Rp 18.000</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Jumbo:</span>
+                                <span class="price-value">Rp 22.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-section">
+                        <div class="size-selector">
+                            <button class="size-btn active" data-size="reguler" data-price="18000">Reguler</button>
+                            <button class="size-btn" data-size="jumbo" data-price="22000">Jumbo</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Chicken Blackpaper', this)">
+                            🛒 Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="menu-image-container">
+                          <img src="images/extrahot.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="menu-image-placeholder">🌶️</div>
+                </div>
+                <div class="menu-content">
+                    <span class="menu-badge">SUPER PEDAS</span>
+                    <h3 class="menu-title">EXTRA HOT</h3>
+                    <p class="menu-description">Untuk pecinta pedas ekstrim! Level maksimal yang bikin berkeringat</p>
+                    <div class="menu-footer">
+                        <div class="price-section">
+                            <div class="price-item">
+                                <span class="price-label">Reguler:</span>
+                                <span class="price-value">Rp 18.000</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Jumbo:</span>
+                                <span class="price-value">Rp 22.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-section">
+                        <div class="size-selector">
+                            <button class="size-btn active" data-size="reguler" data-price="18000">Reguler</button>
+                            <button class="size-btn" data-size="jumbo" data-price="22000">Jumbo</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Extra Hot', this)">
+                            🛒 Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="menu-image-container">
+                                <img src="images/barbeque.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="menu-image-placeholder">🍖</div>
+                </div>
+                <div class="menu-content">
+                    <span class="menu-badge">REKOMENDASI</span>
+                    <h3 class="menu-title">BARBEQUE HOT</h3>
+                    <p class="menu-description">Ayam dengan saus BBQ pedas yang manis dan smoky</p>
+                    <div class="menu-footer">
+                        <div class="price-section">
+                            <div class="price-item">
+                                <span class="price-label">Reguler:</span>
+                                <span class="price-value">Rp 18.000</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Jumbo:</span>
+                                <span class="price-value">Rp 22.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-section">
+                        <div class="size-selector">
+                            <button class="size-btn active" data-size="reguler" data-price="18000">Reguler</button>
+                            <button class="size-btn" data-size="jumbo" data-price="22000">Jumbo</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Barbeque Hot', this)">
+                            🛒 Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Snack Section -->
+<h2 class="section-title">🍔 SNACK</h2>
+<div class="menu-grid">
+    <div class="menu-card">
+        <div class="menu-image-container">
+                       <img src="images/burger.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+           
+        </div>
+        <div class="menu-content">
+            <span class="menu-badge">SNACK</span>
+            <h3 class="menu-title">BURGER</h3>
+            <p class="menu-description">Burger lezat dengan daging dan sayuran segar</p>
+            <div class="menu-footer">
+                <div class="price-section">
+                    <div class="price-item">
+                        <span class="price-value">Rp 12.000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="order-section">
+                <button class="add-to-cart-btn" onclick="addToCart('Burger', this)">
+                    🛒 Tambah ke Keranjang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-card">
+        <div class="menu-image-container">
+                  <img src="images/sosiscrispy.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="menu-image-placeholder">🌭</div>
+        </div>
+        <div class="menu-content">
+            <span class="menu-badge">SNACK</span>
+            <h3 class="menu-title">Sosis Crispy</h3>
+            <p class="menu-description">Sosis goreng renyah, cocok untuk cemilan</p>
+            <div class="menu-footer">
+                <div class="price-section">
+                    <div class="price-item">
+                        <span class="price-value">Rp 10.000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="order-section">
+                <button class="add-to-cart-btn" onclick="addToCart('Sosis Crispy', this)">
+                    🛒 Tambah ke Keranjang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-card">
+        <div class="menu-image-container">
+                <img src="images/ayamnugget.jpg" alt="Original Crispy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="menu-image-placeholder">🍗</div>
+        </div>
+        <div class="menu-content">
+            <span class="menu-badge">SNACK</span>
+            <h3 class="menu-title">Nugget Ayam</h3>
+            <p class="menu-description">Nugget ayam gurih, cocok untuk cemilan anak-anak</p>
+            <div class="menu-footer">
+                <div class="price-section">
+                    <div class="price-item">
+                        <span class="price-value">Rp 10.000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="order-section">
+                <button class="add-to-cart-btn" onclick="addToCart('Nugget Ayam', this)">
+                    🛒 Tambah ke Keranjang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-card">
+        <div class="menu-image-container">
+            <img src="images/kentang.jpg" alt="Snack" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="menu-image-placeholder">🍟</div>
+        </div>
+        <div class="menu-content">
+            <span class="menu-badge">SNACK</span>
+            <h3 class="menu-title">Kentang Goreng</h3>
+            <p class="menu-description">Kentang goreng renyah, cocok untuk cemilan</p>
+            <div class="menu-footer">
+                <div class="price-section">
+                    <div class="price-item">
+                        <span class="price-value">Rp 10.000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="order-section">
+                <button class="add-to-cart-btn" onclick="addToCart('Kentang Goreng', this)">
+                    🛒 Tambah ke Keranjang
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Keranjang Kamu</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <div class="empty-cart-icon">🛒</div>
+                <p>Keranjang kamu masih kosong.</p>
+            </div>
+        </div>
+        <div class="cart-total">
+            <div class="total-row">
+                <span>Total:</span>
+                <span id="cartTotal">Rp 0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 BFC Bintang Fried Chicken. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Keranjang belanja
+        let cart = [];
+
+        // Fungsi toggle cart sidebar
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Pilih ukuran (size)
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('size-btn')) {
+                const parent = e.target.closest('.order-section');
+                parent.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+            }
+        });
+
+        // Tambahkan item ke keranjang
+        function addToCart(name, button) {
+            const parent = button.closest('.order-section');
+            const activeSize = parent.querySelector('.size-btn.active');
+            const size = activeSize.dataset.size;
+            const price = parseInt(activeSize.dataset.price);
+
+            const existing = cart.find(item => item.name === name && item.size === size);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ name, size, price, qty: 1 });
+            }
+
+            updateCart();
+        }
+
+        // Update isi keranjang
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+
+            cartItems.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <p>Keranjang kamu masih kosong.</p>
+                    </div>
+                `;
+            } else {
+                let total = 0;
+                cart.forEach((item, index) => {
+                    total += item.price * item.qty;
+                    cartItems.innerHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-header">
+                                <div>
+                                    <div class="cart-item-title">${item.name}</div>
+                                    <div class="cart-item-size">Ukuran: ${item.size}</div>
+                                </div>
+                                <button class="remove-item" onclick="removeItem(${index})">Hapus</button>
+                            </div>
+                            <div class="cart-item-footer">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                                    <span>${item.qty}</span>
+                                    <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                                </div>
+                                <div class="cart-item-price">Rp ${(item.price * item.qty).toLocaleString()}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                cartCount.textContent = cart.reduce((a, b) => a + b.qty, 0);
+                cartTotal.textContent = `Rp ${total.toLocaleString()}`;
+            }
+        }
+
+// Ubah jumlah item
+function changeQty(index, change) {
+    cart[index].qty += change;
+    
+    if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+    }
+    
+    updateCart();
+}
+
+
+        // Hapus item dari keranjang
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        // Fungsi checkout
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Keranjang kamu masih kosong!');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            // Simulasi proses checkout
+            const orderDetails = cart.map(item => 
+                `${item.name} (${item.size}) x${item.qty} - Rp ${(item.price * item.qty).toLocaleString()}`
+            ).join('\n');
+            
+            alert(`TERIMA KASIH TELAH MEMESAN!\n\nDetail Pesanan:\n${orderDetails}\n\nTotal: Rp ${total.toLocaleString()}\n\nPesanan kamu akan segera diproses!`);
+            
+            // Reset keranjang setelah checkout
+            cart = [];
+            updateCart();
+            toggleCart(); // Tutup sidebar keranjang
+        }
+
+        // Tutup cart ketika klik di luar area cart
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('cartSidebar');
+            const cartButton = document.querySelector('.cart-button');
+            
+            if (sidebar && cartButton && !sidebar.contains(e.target) && !cartButton.contains(e.target) && sidebar.classList.contains('active')) {
+                toggleCart();
+            }
+        });
+
+        // Handle error gambar
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.display = 'none';
+                    const placeholder = this.nextElementSibling;
+                    if (placeholder && placeholder.classList.contains('menu-image-placeholder')) {
+                        placeholder.style.display = 'flex';
+                    }
+                });
+            });
+        });
+
+        // Animasi scroll halus untuk navigasi
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Update cart count on page load
+        updateCart();
+    </script>
+</body>
+</html>
