@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFC - Bintang Fried Chicken | Sensasi Pedas Yang Unik</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    overflow-x: hidden;
+    font-size: 14px; /* ↓ tambahkan ini */
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 90%;
+}
+/* ==== PERKECIL SEMUA FONT SECARA PROPORSIONAL ==== */
+body {
+    transform: scale(0.9);     /* Mengecilkan keseluruhan tampilan 90% */
+    transform-origin: top center; /* Titik penyusutan dari atas tengah halaman */
+}
+
+/* Menyesuaikan posisi agar tidak terpotong */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%);
+            opacity: 0.9;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,204,0,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Header with Glass Effect */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 204, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 0, 0, 0.3);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            animation: fadeInLeft 1s ease;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .logo-circle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+.logo-text h1 {
+    font-size: 36px;        /* ubah sesuai menu.html, misal 42px */
+    font-weight: 800;
+    background: linear-gradient(45deg, #ff0000, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+}
+
+
+.tagline {
+    font-size: 13px;        /* ubah sesuai menu.html */
+    color: #ffcc00;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+
+        /* Navigation */
+        nav {
+            animation: fadeInRight 1s ease;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ffcc00);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        nav a:hover::before,
+        nav a.active::before {
+            left: 0;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,0,0,0.3), transparent);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,204,0,0.2), transparent);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+.hero-subtitle {
+    font-size: 18px;        /* ubah sesuai menu.html */
+    font-weight: 600;
+    color: #ffcc00;
+    letter-spacing: 3px;
+}
+
+
+        .hero h2 {
+    font-size: 80px;        /* bisa dikecilkan 60px atau 70px agar mirip menu.html */
+    font-weight: 800;
+    background: linear-gradient(45deg, #ff0000, #ffcc00, #ff6600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 80px rgba(255, 204, 0, 0.5);
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 24px;        /* bisa diganti 18px atau 16px */
+    font-weight: 300;
+    color: #ddd;
+}
+
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 18px 45px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            color: #fff;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.4);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 0, 0, 0.6);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #ffcc00;
+            border: 2px solid #ffcc00;
+        }
+
+        .cta-secondary:hover {
+            background: #ffcc00;
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 204, 0, 0.4);
+        }
+
+        /* Floating Elements */
+        .floating-chicken {
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            animation: floatRandom 15s infinite ease-in-out;
+        }
+
+        @keyframes floatRandom {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -50px) rotate(90deg); }
+            50% { transform: translate(-50px, 100px) rotate(180deg); }
+            75% { transform: translate(50px, 50px) rotate(270deg); }
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, #ff0000, #ff6600, #ffcc00);
+            padding: 40px;
+            margin: 80px auto;
+            max-width: 1400px;
+            border-radius: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.4);
+            animation: slideInUp 1s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .promo-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: stripeMove 20s linear infinite;
+        }
+
+        @keyframes stripeMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .promo-banner h3 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-banner p {
+            font-size: 19px;
+            color: #fff;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Menu Cards */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+     .section-title {
+    font-size: 56px;        /* ubah sesuai menu.html, misal 42px */
+    font-weight: 800;
+    background: linear-gradient(45deg, #ff0000, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            border-radius: 30px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,0,0,0.1), transparent);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+            animation: rotateGlow 3s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .menu-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(255, 0, 0, 0.5);
+            border-color: rgba(255, 204, 0, 0.8);
+        }
+
+        .menu-image {
+            height: 280px;
+            background: linear-gradient(135deg, rgba(255,0,0,0.3), rgba(255,204,0,0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-image::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            top: -100%;
+            left: -100%;
+            transition: all 0.6s;
+        }
+
+        .menu-card:hover .menu-image::after {
+            top: 100%;
+            left: 100%;
+        }
+
+        .menu-content {
+            padding: 35px;
+        }
+
+        .menu-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+.menu-title {
+    font-size: 28px;        /* bisa 24px */
+    font-weight: 700;
+    color: #ffcc00;
+}
+
+.menu-badge {
+    font-size: 12px;        /* bisa 14px */
+    font-weight: 700;
+}
+
+
+.menu-description {
+    font-size: 15px;        /* bisa disamakan 14px */
+    color: #ccc;
+}
+
+
+        .menu-prices {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .price-box {
+            flex: 1;
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .price-box:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff0000;
+            transform: scale(1.05);
+        }
+
+.price-label {
+    font-size: 13px;        /* sesuai menu.html */
+}
+
+.price-value {
+    font-size: 24px;        /* bisa 20px */
+    font-weight: 800;
+}
+
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,0,0,0.2), transparent);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            transition: all 0.5s;
+        }
+
+        .feature-card:hover::before {
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffcc00;
+            box-shadow: 0 20px 50px rgba(255, 204, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffcc00;
+            margin-bottom: 15px;
+        }
+
+        .feature-text {
+            color: #ccc;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid rgba(255, 204, 0, 0.3);
+            padding: 60px 40px 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #ffcc00;
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            color: #aaa;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-section ul li:hover {
+            color: #ffcc00;
+            transform: translateX(5px);
+        }
+
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #ffcc00;
+        }
+
+        .hours-badge {
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 204, 0, 0.2);
+            color: #888;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 48px; }
+            .hero p { font-size: 18px; }
+            .section-title { font-size: 36px; }
+            .menu-grid { grid-template-columns: 1fr; }
+            nav ul { flex-direction: column; gap: 10px; }
+            .header-content { flex-direction: column; gap: 20px; }
+        }
+
+        /* Scroll Animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-circle">🍗</div>
+                <div class="logo-text">
+                    <h1>BFC</h1>
+                    <p class="tagline">SENSASI PEDAS YANG UNIK</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="floating-chicken" style="top: 10%; left: 5%;">🍗</div>
+        <div class="floating-chicken" style="bottom: 20%; right: 10%;">🌶️</div>
+        <div class="floating-chicken" style="top: 50%; right: 5%;">🔥</div>
+        
+        <div class="hero-content">
+            <p class="hero-subtitle">🔥 Welcome to BFC 🔥</p>
+            <h2>BINTANG<br>FRIED CHICKEN</h2>
+            <p>Rasakan Sensasi Pedas Yang Menggugah Selera!</p>
+            <div class="cta-buttons">
+                <a href="menu.html" class="cta-button cta-primary">Lihat Menu 🍗</a>
+                <a href="kontak.html" class="cta-button cta-secondary">Hubungi Kami 📞</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="promo-banner scroll-animate">
+        <h3>🎉 PROMO SPESIAL! 🎉</h3>
+        <p>Ayam Crispy + Nasi Mulai dari Rp 8.000!</p>
+        <p style="margin-top: 10px;">Paket Berdua Cuma Rp 18.000 - 24.000</p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title scroll-animate">Menu Favorit Kami</h2>
+        
+        <div class="menu-grid">
+            <div class="menu-card scroll-animate">
+                <div class="menu-image">🍗</div>
+                <div class="menu-content">
+                    <span class="menu-badge">Signature</span>
+                    <h3 class="menu-title">ORIGINAL CRISPY</h3>
+                    <p class="menu-description">Ayam goreng tepung crispy dengan bumbu rahasia yang gurih dan renyah di luar, lembut di dalam</p>
+                    <div class="menu-prices">
+                        <div class="price-box">
+                            <p class="price-label">Reguler</p>
+                            <p class="price-value">16K</p>
+                        </div>
+                        <div class="price-box">
+                            <p class="price-label">Jumbo</p>
+                            <p class="price-value">20K</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card scroll-animate">
+                <div class="menu-image">🔥</div>
+                <div class="menu-content">
+                    <span class="menu-badge">Best Seller</span>
+                    <h3 class="menu-title">FIRE CHICKEN</h3>
+                    <p class="menu-description">Ayam crispy dengan saus pedas fire yang menggigit! Sensasi pedas dengan tingkat kepedasan medium-high</p>
+                    <div class="menu-prices">
+                        <div class="price-box">
+                            <p class="price-label">Reguler</p>
+                            <p class="price-value">18K</p>
+                        </div>
+                        <div class="price-box">
+                            <p class="price-label">Jumbo</p>
+                            <p class="price-value">22K</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card scroll-animate">
+                <div class="menu-image">💥</div>
+                <div class="menu-content">
+                    <span class="menu-badge">Popular</span>
+                    <h3 class="menu-title">AYAM GEPREK</h3>
+                    <p class="menu-description">Ayam goreng tepung digeprek dengan sambal level sesuai selera. Pilih level kepedasanmu!</p>
+                    <div class="menu-prices">
+                        <div class="price-box">
+                            <p class="price-label">Ayam</p>
+                            <p class="price-value">10K</p>
+                        </div>
+                        <div class="price-box">
+                            <p class="price-label">+ Nasi</p>
+                            <p class="price-value">12K</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 60px 0;">
+            <a href="menu.html" class="cta-button cta-primary">Lihat Semua Menu →</a>
+        </div>
+
+        <h2 class="section-title scroll-animate">Kenapa Pilih BFC?</h2>
+        
+        <div class="features">
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Pelayanan Cepat</h3>
+                <p class="feature-text">Pesanan disiapkan dengan cepat tanpa mengurangi kualitas rasa</p>
+            </div>
+
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">💯</div>
+                <h3 class="feature-title">Kualitas Terjamin</h3>
+                <p class="feature-text">Menggunakan bahan berkualitas premium dan bumbu rahasia</p>
+            </div>
+
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Harga Terjangkau</h3>
+                <p class="feature-text">Menu mulai dari Rp 8.000 dengan porsi yang memuaskan</p>
+            </div>
+
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">🌶️</div>
+                <h3 class="feature-title">Variasi Rasa</h3>
+                <p class="feature-text">Berbagai pilihan rasa dari original hingga extra hot</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang BFC</h3>
+                <p>BFC (Bintang Fried Chicken) menyajikan ayam goreng dengan sensasi pedas yang unik dan berbagai varian rasa yang menggugah selera.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Jam Operasional</h3>
+                <p><span class="hours-badge">Senin - Jumat: 06.00 - Tutup</span></p>
+                <p><span class="hours-badge">Sabtu - Minggu: 08.00 - Tutup</span></p>
+            </div>
+            <div class="footer-section">
+                <h3>Menu Populer</h3>
+                <ul>
+                    <li>• Original Crispy</li>
+                    <li>• Fire Chicken</li>
+                    <li>• Ayam Geprek</li>
+                    <li>• Chicken Blackpaper</li>
+                    <li>• Extra Hot</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Hubungi Kami</h3>
+                <p>📍 Jl. Opu Daeng Risadju No. 387 Sulawesi Selatan</p>
+                <p>📞 Hubungi untuk informasi lebih lanjut</p>
+                <p><a href="kontak.html">Lihat Detail Kontak →</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BFC - Bintang Fried Chicken. All Rights Reserved.</p>
+            <p style="margin-top: 10px; font-size: 14px;">Sensasi Pedas Yang Unik</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
