@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - BFC Bintang Fried Chicken</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%);
+            opacity: 0.9;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,204,0,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 204, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 0, 0, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo-text h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff0000, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #ffcc00;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ffcc00);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        nav a:hover::before,
+        nav a.active::before {
+            left: 0;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .page-hero {
+            padding: 60px 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+.page-hero h1 {
+    font-size: 35px;
+    font-weight: 800;
+    background: linear-gradient(45deg, #ff0000, #ffcc00, #ff6600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+}
+
+.page-hero p {
+    font-size: 16px;
+    color: #ccc;
+}
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .info-banner {
+            background: linear-gradient(135deg, #ff0000, #ff6600, #ffcc00);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .info-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: stripeMove 20s linear infinite;
+        }
+
+        @keyframes stripeMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .info-banner h2 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-banner p {
+            font-size: 14px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 204, 0, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,0,0,0.2), transparent);
+            border-radius: 50%;
+            top: -75px;
+            right: -75px;
+            transition: all 0.4s;
+        }
+
+        .contact-card:hover::before {
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            border-color: #ffcc00;
+            box-shadow: 0 15px 30px rgba(255, 204, 0, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .contact-card h3 {
+            color: #ffcc00;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            color: #ccc;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            color: #ff0000;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 10px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .contact-value:hover {
+            color: #ffcc00;
+            transform: scale(1.05);
+        }
+
+        .social-username {
+            color: #ffcc00;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .hours-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 204, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+ .section-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(45deg, #ff0000, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
+}
+
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .hours-card {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .hours-card:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff0000;
+            transform: scale(1.03);
+        }
+
+        .hours-card h4 {
+            color: #ffcc00;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .hours-time {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ff0000;
+            margin: 10px 0;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 204, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+.form-group label {
+    display: block;
+    color: #ffcc00;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 204, 0, 0.3);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffcc00;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group select option {
+            background: #1a0000;
+            color: #fff;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            color: #fff;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.6);
+        }
+
+        .map-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 204, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(255,204,0,0.2));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 204, 0, 0.3);
+            margin-top: 20px;
+        }
+
+        .map-content {
+            text-align: center;
+        }
+
+        .map-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        .social-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 204, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.6);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid rgba(255, 204, 0, 0.3);
+            padding: 40px 30px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #ffcc00;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 13px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #ffcc00;
+        }
+
+        .hours-badge {
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 3px 0;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 204, 0, 0.2);
+            color: #888;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 32px; }
+            .section-title { font-size: 24px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            nav ul { flex-direction: column; gap: 8px; }
+            .header-content { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-circle">🍗</div>
+                <div class="logo-text">
+                    <h1>BFC</h1>
+                    <p class="tagline">SENSASI PEDAS YANG UNIK</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="kontak.html" class="active">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <h1>Hubungi Kami</h1>
+        <p>Kami Siap Melayani Anda Dengan Sepenuh Hati</p>
+    </div>
+
+    <div class="container">
+        <div class="info-banner">
+            <h2>📍 Kunjungi Outlet Kami</h2>
+            <p>Nikmati pengalaman makan langsung atau pesan untuk dibawa pulang!</p>
+            <p style="margin-top: 10px; font-size: 16px; font-weight: 700;">Lokasi: Jl. Cendrawasih,Makassar, Sulawesi Selatan</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">📱</div>
+                <h3>WhatsApp</h3>
+                <p>Chat langsung untuk pemesanan cepat dan mudah</p>
+                <a href="https://wa.me/6285191493911" target="_blank" class="contact-value">Chat Sekarang</a>
+                <div class="social-username">0851-9149-3911</div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">📷</div>
+                <h3>Instagram</h3>
+                <p>Follow kami untuk update promo dan menu terbaru</p>
+                <a href="https://www.instagram.com/bfc_cendrawasih" target="_blank" class="contact-value">@bfc_cendrawasih</a>
+                <div class="social-username">BFC Cendrawasih</div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">📘</div>
+                <h3>Facebook</h3>
+                <p>Like page kami untuk informasi lengkap</p>
+                <a href="https://www.facebook.com/bfc_cendrawasih" target="_blank" class="contact-value">BFC Cendrawasih</a>
+                <div class="social-username">Facebook Page</div>
+            </div>
+        </div>
+
+        <div class="hours-section">
+            <h2 class="section-title">⏰ Jam Operasional</h2>
+            <div class="hours-grid">
+                <div class="hours-card">
+                    <h4>Senin - Jumat</h4>
+                    <div class="hours-time">06:00 - 23.00</div>
+                    <p style="color: #999; margin-top: 8px;">Buka pagi hingga malam</p>
+                </div>
+                <div class="hours-card">
+                    <h4>Sabtu - Minggu</h4>
+                    <div class="hours-time">08:00 - 23.00</div>
+                    <p style="color: #999; margin-top: 8px;">Buka hingga malam</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 25px; color: #ccc; font-size: 13px;">
+                💡 <strong style="color: #ffcc00;">Catatan:</strong> Kami tutup saat stok habis. Datang lebih awal untuk menu favorit Anda!
+            </p>
+        </div>
+
+        <div class="contact-form">
+            <h2 class="section-title">💬 Kirim Pesan Kepada Kami</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap *</label>
+                    <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="nama@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Nomor Telepon/WhatsApp *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="08xxxxxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subjek *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Pilih Subjek</option>
+                        <option value="pemesanan">Pemesanan</option>
+                        <option value="pertanyaan">Pertanyaan Menu</option>
+                        <option value="saran">Saran & Kritik</option>
+                        <option value="kerjasama">Kerjasama</option>
+                        <option value="lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Pesan *</label>
+                    <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">Kirim Pesan 📨</button>
+            </form>
+        </div>
+
+    <div class="map-placeholder" style="padding:0; text-align:center;">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d15894.300509028348!2d119.40084302443816!3d-5.1718297963806155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sBFC%20Cendrawasih%20Makassar!5e0!3m2!1sid!2sid!4v1759990635890!5m2!1sid!2sid"
+        width="100%"
+        height="350"
+        style="border:0; border-radius:15px; box-shadow:0 0 25px rgba(255, 0, 0, 0.3);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+
+
+        <div class="info-banner">
+            <h2>🚗 Layanan Delivery</h2>
+            <p>Kami menyediakan layanan pesan antar untuk kemudahan Anda!</p>
+            <p style="margin-top: 15px; font-size: 13px;">
+                Syarat dan ketentuan:<br>
+                • Minimal pemesanan berlaku<br>
+                • Jarak pengiriman terbatas<br>
+                • Hubungi kami untuk informasi detail
+            </p>
+        </div>
+
+        <div class="social-section">
+            <h2 class="section-title">Ikuti Kami di Media Sosial</h2>
+            <p style="color: #ccc; font-size: 14px;">Dapatkan info promo dan menu terbaru!</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/bfc_cendrawasih" target="_blank" class="social-icon" title="Instagram BFC Cendrawasih">
+                    📷
+                </a>
+                <a href="https://www.facebook.com/bfc_cendrawasih" target="_blank" class="social-icon" title="Facebook BFC Cendrawasih">
+                    📘
+                </a>
+                <a href="https://wa.me/6285191493911" target="_blank" class="social-icon" title="WhatsApp BFC">
+                    💬
+                </a>
+            </div>
+            <p style="margin-top: 20px; color: #ffcc00; font-size: 13px;">
+                Instagram: <strong>@bfc_cendrawasih</strong> | 
+                Facebook: <strong>BFC Cendrawasih</strong> | 
+                WhatsApp: <strong>0851-9149-3911</strong>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang BFC</h3>
+                <p>BFC (Bintang Fried Chicken) menyajikan ayam goreng dengan sensasi pedas yang unik dan berbagai varian rasa yang menggugah selera.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Jam Operasional</h3>
+                <p><span class="hours-badge">Senin - Jumat: 06.00 - Tutup</span></p>
+                <p><span class="hours-badge">Sabtu - Minggu: 08.00 - Tutup</span></p>
+            </div>
+            <div class="footer-section">
+                <h3>Menu Populer</h3>
+                <ul>
+                    <li>• Original Crispy</li>
+                    <li>• Fire Chicken</li>
+                    <li>• Ayam Geprek</li>
+                    <li>• Chicken Blackpaper</li>
+                    <li>• Extra Hot</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Hubungi Kami</h3>
+                <p>📍 Jl.Cendrawasih, Makassar, Sulawesi Selatan</p>
+                <p>📍<a href="hhttps://maps.app.goo.gl/xf1QVgRgKxY1F2679?g_st=ac " target="_blank">0851-9149-3911</a></p>
+                <p>📱 <a href="https://wa.me/6285191493911" target="_blank">0851-9149-3911</a></p>
+                <p>📷 <a href="https://www.instagram.com/bfc_cendrawasih" target="_blank">@bfc_cendrawasih</a></p>
+                <p>📘 <a href="https://www.facebook.com/bfc_cendrawasih" target="_blank">BFC Cendrawasih</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BFC - Bintang Fried Chicken. All Rights Reserved.</p>
+            <p style="margin-top: 8px; font-size: 11px;">Sensasi Pedas Yang Unik</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('🎉 Terima kasih! Pesan Anda telah dikirim.\nKami akan segera menghubungi Anda.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
